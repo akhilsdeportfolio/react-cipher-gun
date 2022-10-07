@@ -1,6 +1,8 @@
 .App {
-  text-align: center;
-}
+  text-align: right;
+  display: flex;
+  flex-direction: row-reverse;
+ }
 
 .App-logo {
   height: 40vmin;
