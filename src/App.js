@@ -1,11 +1,6 @@
 import logo from './logo.svg';
-<<<<<<< HEAD
-import './App.css';
-import React from 'react';
-=======
 import React from 'react';
 import { Button, Checkbox, Input, Select, Switch } from 'antd';
->>>>>>> akhil/0002-add-webpack-babel
 import 'antd/dist/antd.css';
 
 function App() {
