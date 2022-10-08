@@ -3,6 +3,9 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
+const PUBLIC_FOLDER = path.resolve(__dirname, 'public');
 
 module.exports = {
   entry: './src/index.js',
@@ -23,8 +26,27 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        test: /\.less$/i,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                strictMath: true,
+              },
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(jpe?g|png|gif|woff|woff2|otf|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
@@ -41,6 +63,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [{ from: './public/*' }],
+    }),
     new HtmlWebpackPlugin({
       template: __dirname + '/src/index.ejs',
       filename: 'index.html',
